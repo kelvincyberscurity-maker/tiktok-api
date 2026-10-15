@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090b12"><title>VINZ TikTok Downloader</title>
+<style>
+:root{color-scheme:dark;--bg:#080a12;--panel:#111522;--line:#252b40;--muted:#9aa4bd;--text:#f4f6ff;--cyan:#5ee7f7;--purple:#9b8cff;--pink:#ff77b7}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 15% 0%,#19284b 0,transparent 40%),radial-gradient(ellipse at 95% 15%,#321c48 0,transparent 35%),var(--bg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text)}
+.wrap{width:min(920px,calc(100% - 28px));margin:auto;padding:38px 0 56px}header{text-align:center;margin-bottom:28px}
+.logo{display:inline-flex;border:1px solid #34415d;background:#12182a;padding:8px 13px;border-radius:999px;color:var(--cyan);font-size:12px;font-weight:800;letter-spacing:1.6px}
+h1{font-size:clamp(30px,6vw,48px);line-height:1.08;margin:18px 0 12px;letter-spacing:-1.7px}h1 span{background:linear-gradient(90deg,var(--cyan),#b2a1ff,var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);line-height:1.6;margin:auto;max-width:560px}.panel{background:linear-gradient(145deg,rgba(21,27,45,.96),rgba(13,16,27,.96));border:1px solid var(--line);border-radius:24px;padding:clamp(18px,4vw,30px);box-shadow:0 22px 80px #0006}
+label{display:block;font-size:13px;font-weight:700;color:#dce3ff;margin:0 0 10px}.inputrow{display:flex;gap:10px}
+input{min-width:0;flex:1;background:#090d18;border:1px solid #303951;color:white;border-radius:13px;padding:15px 14px;font-size:15px;outline:none}input:focus{border-color:var(--cyan)}
+button,.download{border:0;cursor:pointer;text-decoration:none;display:inline-flex;justify-content:center;align-items:center;gap:8px;border-radius:13px;padding:14px 18px;font-weight:800;font-size:14px;color:#071019;background:linear-gradient(100deg,var(--cyan),#a7b5ff)}
+button:disabled{opacity:.55;cursor:wait}.hint{color:var(--muted);font-size:12px;line-height:1.6;margin:10px 2px 0}
+.status{display:none;margin-top:16px;padding:12px 14px;border-radius:12px;font-size:13px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}.status.show{display:block}.status.info{background:#122337;border:1px solid #244d68;color:#c7f4ff}.status.error{background:#321b25;border:1px solid #663347;color:#ffd6e2}
+.result{display:none;margin-top:20px}.result.show{display:block}.resulthead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}h2{font-size:17px;margin:0}.tag{font-size:11px;color:var(--cyan);border:1px solid #24545d;background:#0d242a;border-radius:999px;padding:6px 9px}
+.content{display:grid;grid-template-columns:minmax(0,230px) 1fr;gap:20px}.coverbox{background:#080b12;border:1px solid var(--line);border-radius:16px;overflow:hidden;aspect-ratio:9/12;display:flex;align-items:center;justify-content:center}.coverbox img{width:100%;height:100%;object-fit:cover}.placeholder{padding:20px;color:var(--muted);text-align:center;font-size:13px}
+.desc{font-size:14px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere;margin:0 0 14px}.author{font-size:13px;color:var(--muted);margin-bottom:16px}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-bottom:18px}.stat{padding:11px;border-radius:12px;background:#0a0e19;border:1px solid #222a3c}.stat small{display:block;color:var(--muted);font-size:11px;margin-bottom:5px}.stat strong{font-size:15px}
+.actions{display:flex;flex-wrap:wrap;gap:9px}.download.secondary{color:#e7eaff;background:#202841;border:1px solid #37415e}.raw{margin-top:18px;border-top:1px solid var(--line);padding-top:15px}.raw summary{cursor:pointer;color:#c4cce4;font-size:13px;font-weight:700}.raw pre{max-height:340px;overflow:auto;padding:14px;background:#080b13;border:1px solid #20283a;border-radius:12px;font-size:12px;line-height:1.65;color:#c7e9ff;white-space:pre-wrap;overflow-wrap:anywhere}
+footer{text-align:center;color:#717c96;font-size:12px;margin-top:22px}@media(max-width:620px){.wrap{padding-top:26px}.inputrow{flex-direction:column}.inputrow button{width:100%}.content{grid-template-columns:1fr}.coverbox{max-width:260px;margin:auto;width:100%}.resulthead{align-items:flex-start}}
+</style></head>
+<body><main class="wrap">
+<header><div class="logo">✦ VINZ API · MEDIA TOOLS</div><h1>TikTok <span>Downloader</span></h1><p class="sub">Tempel tautan TikTok untuk melihat detail video dan membuka tautan unduh. Tanpa login.</p></header>
+<section class="panel"><form id="form"><label for="tiktokUrl">LINK VIDEO TIKTOK</label><div class="inputrow"><input id="tiktokUrl" type="url" placeholder="https://www.tiktok.com/@user/video/..." required><button id="submitBtn">⬇ Ambil Video</button></div><p class="hint">Jika tombol unduh tidak memulai unduhan, pilih “Buka video” lalu simpan melalui browser.</p></form>
+<div id="status" class="status" role="status"></div>
+<section id="result" class="result"><div class="resulthead"><h2>Hasil video</h2><span class="tag">API RESPONSE</span></div><div class="content"><div class="coverbox" id="coverbox"><div class="placeholder">Pratinjau video</div></div><div><p class="desc" id="description"></p><div class="author" id="author"></div><div class="stats"><div class="stat"><small>Views</small><strong id="views">—</strong></div><div class="stat"><small>Likes</small><strong id="likes">—</strong></div><div class="stat"><small>Komentar</small><strong id="comments">—</strong></div><div class="stat"><small>Bagikan</small><strong id="shares">—</strong></div></div><div class="actions" id="actions"></div></div></div><details class="raw"><summary>Lihat JSON response</summary><pre id="json"></pre></details></section></section>
+<footer>VINZ TikTok Downloader · Unduh hanya konten yang kamu punya izin untuk simpan.</footer></main>
+<script>
+/* Ganti URL ini jika endpoint API kamu berbeda. */
+const API_ENDPOINT = "https://vinzofficiall.vercel.app/download";
+const form=document.getElementById("form"), input=document.getElementById("tiktokUrl"), btn=document.getElementById("submitBtn"), statusBox=document.getElementById("status"), resultBox=document.getElementById("result");
+function status(msg,type="info"){statusBox.textContent=msg;statusBox.className="status show "+type}
+function first(...v){return v.find(x=>x!==undefined&&x!==null&&x!=="")??null}
+function num(v){let n=Number(v);return Number.isFinite(n)?n.toLocaleString("id-ID"):"—"}
+function getData(p){let d=p;for(let i=0;i<5;i++){if(d&&d.result)d=d.result;else break}return d||{}}
+function action(label,url,primary=false){if(!url||typeof url!=="string")return;let a=document.createElement("a");a.className="download"+(primary?"":" secondary");a.href=url;a.target="_blank";a.rel="noopener noreferrer";a.textContent=label;if(primary)a.download="";document.getElementById("actions").appendChild(a)}
+form.addEventListener("submit",async e=>{e.preventDefault();let link=input.value.trim();try{let u=new URL(link);if(u.protocol!=="https:"||!/(^|\.)tiktok\.com$/i.test(u.hostname))throw Error("Masukkan URL HTTPS dari TikTok.");}catch(err){resultBox.classList.remove("show");status(err.message||"URL tidak valid.","error");return}
+btn.disabled=true;btn.textContent="Memproses...";resultBox.classList.remove("show");status("Mengambil data video dari API...");
+try{let endpoint=new URL(API_ENDPOINT);endpoint.searchParams.set("url",link);let response=await fetch(endpoint,{headers:{Accept:"application/json"}});let raw=await response.text(),payload;try{payload=JSON.parse(raw)}catch{throw Error("API tidak mengembalikan JSON. Periksa URL endpoint API.")}if(!response.ok||payload.status===false||payload.error)throw Error(payload.message||payload.error||("API error "+response.status));
+let d=getData(payload),a=d.author||{},s=d.statistics||{},v=d.video||{},m=d.music||{};
+document.getElementById("description").textContent=first(d.description,d.desc,d.title,"Video TikTok");
+document.getElementById("author").textContent="@"+first(a.username,a.uniqueId,"unknown")+(a.nickname?" · "+a.nickname:"");
+document.getElementById("views").textContent=num(first(s.views,s.playCount));document.getElementById("likes").textContent=num(first(s.likes,s.likeCount));document.getElementById("comments").textContent=num(first(s.comments,s.commentCount));document.getElementById("shares").textContent=num(first(s.shares,s.shareCount));
+let cover=first(v.cover,v.originCover,d.cover);cover=Array.isArray(cover)?cover[0]:cover;let box=document.getElementById("coverbox");box.replaceChildren();if(cover){let img=document.createElement("img");img.src=cover;img.alt="Sampul video";img.onerror=()=>{box.innerHTML='<div class="placeholder">Sampul tidak tersedia</div>'};box.appendChild(img)}else box.innerHTML='<div class="placeholder">Sampul tidak tersedia</div>';
+let play=first(v.playUrl,v.playAddr,d.playUrl,d.videoUrl),down=first(v.downloadUrl,v.downloadAddr,d.downloadUrl,d.nowm);play=Array.isArray(play)?play[0]:play;down=Array.isArray(down)?down[0]:down;let actions=document.getElementById("actions");actions.replaceChildren();action("⬇ Unduh video",down||play,true);if(play&&play!==down)action("▶ Buka video",play);let audio=first(m.url,m.playUrl);audio=Array.isArray(audio)?audio[0]:audio;if(audio)action("♫ Buka audio",audio);
+if(!actions.children.length){let p=document.createElement("p");p.className="hint";p.textContent="Data berhasil diambil, tetapi URL video tidak ditemukan pada respons API.";actions.appendChild(p)}
+document.getElementById("json").textContent=JSON.stringify(payload,null,2);resultBox.classList.add("show");statusBox.className="status";
+}catch(err){status("Gagal mengambil video.\n"+(err.message||"Terjadi kesalahan.")+"\n\nPastikan endpoint benar dan CORS diizinkan.","error")}finally{btn.disabled=false;btn.textContent="⬇ Ambil Video"}
+});
+</script></body></html>
