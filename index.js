@@ -3,7 +3,7 @@ const cors = require("cors");
 const Tiktok = require("@tobyg74/tiktok-api-dl");
 
 const app = express();
-app.set("json spaces", 2);
+app.set("json spaces", 4);
 app.use(cors());
 app.use(express.json());
 
