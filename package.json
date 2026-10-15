@@ -15,9 +15,9 @@
   "author": "Mahmovdsayed",
   "license": "MIT",
   "dependencies": {
+    "@tobyg74/tiktok-api-dl": "1.3.7",
     "cors": "^2.8.5",
     "express": "^4.19.2",
-    "tiktok-api-downloader": "^0.2.0",
     "got": "^11.8.2"
   }
 }
